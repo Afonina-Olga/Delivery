@@ -23,7 +23,7 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 		/// </summary>
 		/// <param name="x">Координата x</param>
 		/// <param name="y">Координана y</param>
-		private Location(byte x, byte y) : this()
+		private Location(int x, int y) : this()
 		{
 			X = x;
 			Y = y;
@@ -32,19 +32,19 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 		/// <summary>
 		/// Координана X
 		/// </summary>
-		public byte X { get; }
+		public int X { get; }
 
 		/// <summary>
 		/// Координана Y
 		/// </summary>
-		public byte Y { get; }
+		public int Y { get; }
 
 		/// <summary>
 		/// Factory method
 		/// </summary>
 		/// <param name="x">Координата х</param>
 		/// <param name="y">Координата y</param>
-		public static Result<Location, Error> Create(byte x, byte y)
+		public static Result<Location, Error> Create(int x, int y)
 		{
 			if (x < _minLocation.X || x > _maxLocation.X)
 			{
@@ -65,8 +65,8 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 		public static Location CreateRandom()
 		{
 			var random = new Random();
-			var x = (byte)random.Next(_minLocation.X, _maxLocation.X + 1);
-			var y = (byte)random.Next(_maxLocation.Y, _maxLocation.Y + 1);
+			var x = random.Next(_minLocation.X, _maxLocation.X + 1);
+			var y = random.Next(_maxLocation.Y, _maxLocation.Y + 1);
 			return new Location(x, y);
 		}
 
