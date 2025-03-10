@@ -6,8 +6,8 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 {
 	public class Location : ValueObject
 	{
-		private static readonly Location _maxLocation = new(10, 10);
-		private static readonly Location _minLocation = new(1, 1);
+		public static readonly Location MinLocation = new(1, 1);
+		public static readonly Location MaxLocation = new(10, 10);
 
 		/// <summary>
 		/// Конструктор
@@ -46,12 +46,12 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 		/// <param name="y">Координата y</param>
 		public static Result<Location, Error> Create(int x, int y)
 		{
-			if (x < _minLocation.X || x > _maxLocation.X)
+			if (x < MinLocation.X || x > MaxLocation.X)
 			{
 				return GeneralErrors.ValueIsRequired(nameof(x));
 			}
 
-			if (y < _minLocation.Y || y > _maxLocation.Y)
+			if (y < MinLocation.Y || y > MaxLocation.Y)
 			{
 				return GeneralErrors.ValueIsRequired(nameof(y));
 			}
@@ -65,8 +65,8 @@ namespace DeliveryApp.Core.Domain.Model.SharedKernel
 		public static Location CreateRandom()
 		{
 			var random = new Random();
-			var x = random.Next(_minLocation.X, _maxLocation.X + 1);
-			var y = random.Next(_maxLocation.Y, _maxLocation.Y + 1);
+			var x = random.Next(MinLocation.X, MaxLocation.X + 1);
+			var y = random.Next(MinLocation.Y, MaxLocation.Y + 1);
 			return new Location(x, y);
 		}
 

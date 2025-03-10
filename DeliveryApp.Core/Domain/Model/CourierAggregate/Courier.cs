@@ -25,6 +25,7 @@ namespace DeliveryApp.Core.Domain.Model.CourierAggregate
 			Transport transport,
 			Location location)
 		{
+			Id = Guid.NewGuid();
 			Name = name;
 			Transport = transport;
 			Location = location;
@@ -73,7 +74,6 @@ namespace DeliveryApp.Core.Domain.Model.CourierAggregate
 		/// <summary>
 		/// Сделать курьера занятым
 		/// </summary>
-		/// <returns>Результат</returns>
 		public UnitResult<Error> SetBusy()
 		{
 			if (Status == CourierStatus.Busy) return Errors.CantAssignOrderWhenCourierIsBusy();
@@ -111,8 +111,6 @@ namespace DeliveryApp.Core.Domain.Model.CourierAggregate
 		public UnitResult<Error> Go(Location location)
 		{
 			if (location is null) return GeneralErrors.ValueIsRequired(nameof(location));
-			// Курьер уже находится в пункте назначения
-			if (location == Location) return Errors.CantGoWhenCourierIsAlreadyInLocation();
 
 			// Расстояние до места назначения по х
 			var dx = location.X - Location.X;
