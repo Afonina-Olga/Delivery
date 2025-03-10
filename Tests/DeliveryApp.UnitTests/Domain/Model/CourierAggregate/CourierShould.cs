@@ -3,7 +3,6 @@ using DeliveryApp.Core.Domain.Model.SharedKernel;
 using FluentAssertions;
 using Primitives;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -87,65 +86,109 @@ namespace DeliveryApp.UnitTests.Domain.Model.CourierAggregate
 
 			// Велосипедист, заказ X:совпадает, Y: совпадает
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 1).Value, Location.Create(1, 1).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 1).Value, Location.Create(1, 1).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 5).Value, Location.Create(5, 5).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 5).Value, Location.Create(5, 5).Value
+			];
 
 			// Велосипедист, заказ X:совпадает, Y: выше
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 3).Value, Location.Create(1, 3).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 3).Value, Location.Create(1, 3).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 5).Value, Location.Create(1, 3).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 5).Value, Location.Create(1, 3).Value
+			];
 
 			// Велосипедист, заказ X:правее, Y: совпадает
 			yield return
-				[Transport.Bicycle, Location.Create(2, 2).Value, Location.Create(4, 2).Value, Location.Create(4, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(2, 2).Value, Location.Create(4, 2).Value, Location.Create(4, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(8, 5).Value, Location.Create(7, 5).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(8, 5).Value, Location.Create(7, 5).Value
+			];
 
 			// Велосипедист, заказ X:правее, Y: выше
 			yield return
-				[Transport.Bicycle, Location.Create(2, 2).Value, Location.Create(4, 4).Value, Location.Create(4, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(2, 2).Value, Location.Create(4, 4).Value, Location.Create(4, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(5, 5).Value, Location.Create(3, 1).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(5, 5).Value, Location.Create(3, 1).Value
+			];
 
 			// Велосипедист, заказ X:совпадает, Y: ниже
 			yield return
-				[Transport.Bicycle, Location.Create(1, 3).Value, Location.Create(1, 1).Value, Location.Create(1, 1).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 3).Value, Location.Create(1, 1).Value, Location.Create(1, 1).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 1).Value, Location.Create(5, 3).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 1).Value, Location.Create(5, 3).Value
+			];
 
 			// Велосипедист, заказ X:левее, Y: совпадает
 			yield return
-				[Transport.Bicycle, Location.Create(3, 2).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(3, 2).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(1, 5).Value, Location.Create(3, 5).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(1, 5).Value, Location.Create(3, 5).Value
+			];
 
 			// Велосипедист, заказ X:левее, Y: ниже
 			yield return
-				[Transport.Bicycle, Location.Create(3, 3).Value, Location.Create(1, 1).Value, Location.Create(1, 3).Value];
+			[
+				Transport.Bicycle, Location.Create(3, 3).Value, Location.Create(1, 1).Value, Location.Create(1, 3).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(1, 1).Value, Location.Create(3, 5).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(1, 1).Value, Location.Create(3, 5).Value
+			];
 
 			// Велосипедист, заказ ближе чем скорость
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(2, 1).Value, Location.Create(2, 1).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(2, 1).Value, Location.Create(2, 1).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 4).Value, Location.Create(5, 4).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 4).Value, Location.Create(5, 4).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(4, 5).Value, Location.Create(4, 5).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(4, 5).Value, Location.Create(4, 5).Value
+			];
 
 			// Велосипедист, заказ с шагами по 2 осям
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(2, 2).Value, Location.Create(2, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(2, 2).Value, Location.Create(2, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(4, 4).Value, Location.Create(4, 4).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(4, 4).Value, Location.Create(4, 4).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value];
+			[
+				Transport.Bicycle, Location.Create(1, 1).Value, Location.Create(1, 2).Value, Location.Create(1, 2).Value
+			];
 			yield return
-				[Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 4).Value, Location.Create(5, 4).Value];
+			[
+				Transport.Bicycle, Location.Create(5, 5).Value, Location.Create(5, 4).Value, Location.Create(5, 4).Value
+			];
 		}
 
 		[Fact]

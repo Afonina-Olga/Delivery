@@ -143,13 +143,10 @@ namespace DeliveryApp.Core.Domain.Model.CourierAggregate
 			if (cellsCount <= Math.Abs(dy))
 			{
 				Location = Location.Create(Location.X, GetY()).Value;
-				return UnitResult.Success<Error>();
 			}
 			else // Заканчиваем поездку
 			{
 				Location = Location.Create(Location.X, Location.Y + dy).Value;
-				if (Location == location)
-					return UnitResult.Success<Error>();
 			}
 
 			return UnitResult.Success<Error>();
@@ -177,12 +174,6 @@ namespace DeliveryApp.Core.Domain.Model.CourierAggregate
 			{
 				return new Error($"{nameof(Courier).ToLowerInvariant()}.cant.assign.order.when.courier.is.busy",
 					"Нельзя назначить заказ на занятого курьера");
-			}
-
-			public static Error CantGoWhenCourierIsAlreadyInLocation()
-			{
-				return new Error($"{nameof(Courier)}.cant.go.when.courier.is.already.in.location",
-					"Нельзя переместить курьера, если он уже находится в пункте назначения");
 			}
 		}
 	}
