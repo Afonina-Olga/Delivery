@@ -78,7 +78,6 @@ namespace DeliveryApp.Core.Domain.Model.OrderAggregate
 		/// <summary>
 		/// Завершить выполнение заказа
 		/// </summary>
-		/// <returns>Результат</returns>
 		public UnitResult<Error> Complete()
 		{
 			if (Status != OrderStatus.Assigned) return Errors.CantCompletedNotAssignedOrder();
